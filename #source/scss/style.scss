@@ -1,0 +1,464 @@
+//<МИКСИНЫ>==============================================================================================
+@import 'mixins.scss';
+//</МИКСИНЫ>=============================================================================================
+
+//<ШРИФТЫ>===============================================================================================
+@import 'font.scss';
+//</ШРИФТЫ>==============================================================================================
+
+//<ЦВЕТА>================================================================================================
+@import 'color.scss';
+//</ЦВЕТА>===============================================================================================
+@import 'animation.scss';
+//<ПЕРЕМЕННЫЕ>===========================================================================================
+$minwidth:320px;
+$mw:1250;
+$pp:24;  //12
+$md1:$mw+$pp;
+$md2:992.98;
+$md3:767.98;
+$md4:479.98;
+//</ПЕРЕМЕННЫЕ>==========================================================================================
+
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===========================================================================
+@import 'null.scss';
+//</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>======================================================================================
+
+//<ОБОЛОЧКА>=========================================================================================================
+.wrapper{width: 100%;min-height: 100%;overflow: hidden;
+	&.loaded{}
+}
+//</ОБОЛОЧКА>========================================================================================================
+
+//<ОСНОВНАЯ СЕТКА>===================================================================================================
+.container{
+	max-width:$mw+px;
+	margin: 0 auto;
+	width: 100%;
+
+		&.f{
+			@include flexbox();
+			justify-content: space-between md2;
+
+			@media(max-width:$md2+px){
+				display: block;
+			}
+		}
+	}
+
+
+.container2{
+	&.f{
+		@include flexbox();
+		justify-content: space-between;
+
+		@media (max-width:$md2+px){
+		flex-direction: column-reverse;
+		position: relative;
+		}
+	}
+	max-width:854px;
+	margin: 0 auto;
+	width: 100%;
+}
+//</ОСНОВНАЯ СЕТКА>==================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================
+@import "baguetteBox.scss";
+@import "popover.min.scss";
+@import "popup.scss";
+@import "header.scss";
+@import "footer.scss";
+//</ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>===================================================================
+
+//<ОСНОВНОЙ БЛОК>====================================================================================================
+//-переменные для заготовки
+$mw-BROOOG: $mw + ($pp * 2);//1360 ширина ограничивающего контейнера учитывая два padding
+$mw-content: 52.8%;//Размер контента в %
+$mw-content-num: 0.528;//Размер контента в 0.5
+$mw-image: 0.5088;//Размер изображения в 0.5
+
+.section {
+ overflow: hidden;
+ padding-top: 94px;
+
+ @media (max-width:$md2+px){
+	padding-top: 73px;
+ }
+ 
+ @media (min-width:992.98px){
+	display: flex;
+ }
+
+ &__content {
+	 flex: 0 0 100%; 
+	 display: flex;
+ }
+
+ &__container {
+	max-width: $mw-BROOOG + px;
+	padding: 0px #{$pp + px};
+	margin: 0 auto;
+ }
+
+ &__body {
+	 @include a_slide-right-or-left(0.8s, 0s, -100%);
+	 padding: 90px 0px 0px 0px;
+
+	@media (min-width:992.98px){
+	 width: $mw-content;
+	}
+
+	@media (max-width:$md2+px){
+		padding: 0px 0px 0px 0px;
+	}
+ }
+
+ &__image {
+
+	@media (min-width:992.98px){ 
+	 position: relative;
+	 flex: 0 0 calc(((100vw - #{($pp * 2) + px}) * #{$mw-image}) + #{$pp + px});
+	 padding: 0 0 30.0528% 0;
+	 transform: translate(-100%, 0px);
+	 
+	}
+
+	@media (min-width: $mw-BROOOG + px){
+	 flex: 0 0 calc(100vw - (((100vw - #{$mw-BROOOG + px}) / 2) + ((#{$mw-BROOOG + px} - #{($pp * 2) + px}) * #{$mw-content-num}) + #{$pp + px}));
+	}
+
+	img{
+	 max-width: 100%;
+
+	 @media (min-width:992.98px){
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 18px;
+		left: -46px;
+		object-fit: scale-down;
+
+		@media (max-width:1070px){
+			left: 0px;
+		}
+	 }
+	}
+ }
+}
+
+.body-section {
+	@include adaptive-size(48, 0,margin-bottom);
+
+	&.body-section_size{
+		max-width: 408px;
+
+		@media (max-width:$md2+px){
+			max-width: 100%;
+		}
+	}
+	// .body-section__title
+
+	&__title {
+		font-family: Calibri;
+		@include adaptiv-font(60, 30, 0);
+		font-weight: bold;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.2;
+		letter-spacing: normal;
+		text-align: left;
+		color: #141419;
+		@include adaptive-size(20, 10,margin-bottom);
+		@include adaptive-size(0, 0,margin-top);
+
+		&.body-section_size{
+			@include adaptiv-font(58, 30, 0);
+		}
+
+		&_center{
+			text-align: center;
+		}
+
+		@media (max-width:$md2+px){
+			text-align: center;
+		}
+
+		span{
+			//Текст в html должен находится в span или другом строчном обьекте (стили для строчного обьекта)
+			background-image: linear-gradient(90deg, rgba(251,151,59,1) 0%, rgba(251,151,59,1) 100%);//создали линейный градиент
+			background-repeat: repeat-x;//градиент будет повторяться по оси x (вмсете с background-size можно регулировать высоту градиента)
+			background-size: 1px 10px;//задаем ширину и высоту (ширину лучше задавать в 1px т.к. благодаря background-repeat: repeat-x будет более точная настройка)
+			background-position: 0 75%;//переместили градиент вниз насколько нужно по макету
+		}
+	}
+
+	// .body-section__text
+
+	&__text {
+		max-width: 324px;
+		font-family: Calibri;
+		font-size: 24px;
+		@include adaptiv-font(24, 18,0);
+		font-weight: normal;
+		font-stretch: normal;
+		font-style: normal;
+		line-height: 1.5;
+		letter-spacing: normal;
+		text-align: left;
+		color: #616161;
+		@include adaptive-size(37, 15, margin-bottom);
+
+		&.body-section_size{
+			max-width: 246px;
+			@media (max-width:$md2+px){
+				max-width: 100%;
+			}
+		}
+
+		@media (max-width:$md2+px){
+			max-width: 100%;
+			text-align: center;
+		}
+
+		span{
+			font-weight: bold;
+			color: #fb973b;
+		}
+
+		&_center{
+			text-align: center;
+			margin: 0px auto;
+			max-width: 510px;
+		}
+	}
+
+	&__forms{
+		position: relative;
+		@include adaptive-size(80, 40,margin-bottom);
+		max-width: 391px;
+		height: 57px;
+
+		@media (max-width:$md2+px){
+			margin: 0px auto;
+		}
+
+		@media (max-width:$md4+px){
+		height: auto;
+		}
+	}
+}
+
+//===================================================================================================================
+.about-us {
+	padding: 118px 0px 0px 0px;
+	@include a_slide-top($delay:0.5s, $y:100%);
+
+	@media (max-width:$md2+px){
+		padding: 50px 0px 0px 0px;
+	}
+	// .about-us__content
+
+	&__content {
+	}
+
+	// .about-us__img
+
+	&__img {
+		max-width: 397px;
+
+		@media (max-width:$md2+px){
+		position: ABSOLUTE;
+		width: 100%;
+		left: 50%;
+		top: 0;
+		@include tr(-50%,0px,0px);
+		opacity: 0.1;
+		}
+
+		img{
+			width: 100%;
+		}
+	}
+
+	// .about-us__text
+
+	&__text {
+		div{
+			font-family: Calibri;
+			font-size: 18px;
+			font-weight: normal;
+			font-stretch: normal;
+			font-style: normal;
+			line-height: 1.39;
+			letter-spacing: normal;
+			text-align: center;
+			color: #141419;
+			max-width: 400px;
+			margin-bottom: 20px;
+
+			@media (max-width:$md2+px){
+				max-width: 100%;
+				margin: 0px auto 20px auto;
+			}
+
+			&:first-child{
+				padding-top: 55px;
+				position: relative;
+
+				&:before{
+					content: "1";
+					font-family: Calibri;
+					font-size: 18px;
+					font-weight: normal;
+					font-stretch: normal;
+					font-style: normal;
+					line-height: 1;
+					letter-spacing: normal;
+					color: #fb973b;
+					border-radius: 50%;
+					border: 1px #fb973b solid;
+
+					position: absolute;
+					width: 21px;
+					height: 21px;
+					left: 50%;
+					top: 0;
+					
+					@include tr(-50%,0px,0px);
+				}
+
+				&::after{
+					content:'';
+					position: absolute;
+					width: 1px;
+					height: 21px;
+					background-color: #fb973b;
+					left: 50%;
+					top: 21px;
+					@include tr(-50%,0px,0px);
+				}
+			}
+
+			&:last-child{
+				margin-bottom: 0;
+			}
+
+			&:nth-of-type(2), &:nth-of-type(3){
+				padding-top: 75px;
+				position: relative;
+
+				&:after{
+					font-family: Calibri;
+					font-size: 18px;
+					font-weight: normal;
+					font-stretch: normal;
+					font-style: normal;
+					line-height: 1;
+					letter-spacing: normal;
+					color: #fb973b;
+					border-radius: 50%;
+					border: 1px #fb973b solid;
+					background-color: #fff;
+					position: absolute;
+					width: 21px;
+					height: 21px;
+					left: 50%;
+					top: 21px;
+					
+					@include tr(-50%,0px,0px);
+				}
+
+				&::before{
+					content:'';
+					position: absolute;
+					width: 1px;
+					height: 63px;
+					background-color: #fb973b;
+					left: 50%;
+					top: 0px;
+					@include tr(-50%,0px,0px);
+				}
+			}
+
+			&:nth-of-type(2){
+				&:after{
+					content: '2';
+				}
+			}
+			&:nth-of-type(3){
+				&:after{
+					content: '3';
+				}
+			}
+		}
+	}
+}
+.container2 {
+}
+//===================================================================================================================
+.partners {
+padding: 87px 0px 0px 0px;
+@include a_slide-top($y:100%);
+
+@media (max-width:$md2+px){
+	padding: 50px 0px 0px 0px;
+}
+	// .partners__info
+
+	&__info {
+	}
+
+	// .partners__logo
+
+	&__logo {
+		width: 100%;
+		display: grid;
+		grid-template-columns:  auto auto;
+		grid-template-rows: auto auto auto;
+		justify-items: right;
+		margin: 25px 0px 0px 0px;
+
+		@media (max-width:$md2+px){
+			justify-items: center;
+		}
+
+		@media (max-width:570px){
+			grid-template-columns: auto;
+		}
+
+		div{
+			margin: 0px 0px 70px 0px;
+
+			@media (max-width:570px){
+				margin: 0px 0px 35px 0px;
+			}
+		}
+	}
+}
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//===================================================================================================================
+
+//</ОСНОВНОЙ БЛОК>===================================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>=============================================================
+@import "forms.scss";
+@import "ui.scss";
+//</ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>============================================================
