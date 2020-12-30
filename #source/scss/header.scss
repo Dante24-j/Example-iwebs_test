@@ -1,41 +1,41 @@
 .header {
 
-	position: fixed;								//!НЕ ТРОГАТЬ
-	width: 100%;										//!НЕ ТРОГАТЬ
-	top: 0;													//!НЕ ТРОГАТЬ
-	left: 0;												//!НЕ ТРОГАТЬ
-	z-index: 50;										//!НЕ ТРОГАТЬ
-	padding: 28px 0px 0px 0px;							//*добавляет меню отступы сверху и снизу
+	position: fixed;								
+	width: 100%;										
+	top: 0;													
+	left: 0;												
+	z-index: 50;										
+	padding: 28px 0px 0px 0px;
 
 	@media (max-width:$md2+px){
-		padding: 20px 0px;						//*добавляет меню отступы сверху и снизу на 992,98
+		padding: 20px 0px;
 	}
 
 	//!НЕ ТОРОГАТЬ (ПОДЛОЖКА)
 	&::before{
-		content: '';									//!НЕ ТРОГАТЬ
-		position: absolute;						//!НЕ ТРОГАТЬ
-		top: 0;												//!НЕ ТРОГАТЬ
-		left: 0;											//!НЕ ТРОГАТЬ
-		width: 100%;									//!НЕ ТРОГАТЬ
-		height: 100%;									//!НЕ ТРОГАТЬ
-		z-index: 2;										//!НЕ ТРОГАТЬ
-		background-color: #fff;			//*цвет подложки
+		content: '';									
+		position: absolute;						
+		top: 0;												
+		left: 0;											
+		width: 100%;									
+		height: 100%;									
+		z-index: 2;										
+		background-color: #fff;
 	}
 	// .header__menu
 
 	&__menu {
-		position: relative;						//!НЕ ТРОГАТЬ
+		position: relative;						
 	}
 }
 .container {
 	&.r {
-		position: relative;						//!НЕ ТРОГАТЬ
+		position: relative;						
 	}
 }
 .menu {
 	@include flexbox();
-	justify-content: left;					//!ХЗ
+	justify-content: left;
 
 	@media (max-width:$md2+px){
 		justify-content: space-between;
@@ -43,8 +43,8 @@
 	}
 
 	&__logo {
-		margin: 0px 116px 0px 0px;		//*отступ влево от лого
-		z-index: 2;									//!НЕ ТРОГАТЬ
+		margin: 0px 116px 0px 0px;
+		z-index: 2;									
 		img{
 			width: 150px;
 
@@ -61,40 +61,39 @@
 
 	// .menu__body - оболочка для пунктов меню
 	&__body {
-		@include flexbox();							//!НЕ ТРОГАТЬ (убрать если нужно одно меню над другим)
-		width: 100%;										//!НЕ ТРОГАТЬ
-		justify-content: space-between; //*определяет как два подменю размещаются в блоке
-		z-index: 2;											//!НЕ ТРОГАТЬ
+		@include flexbox();
+		width: 100%;										
+		justify-content: space-between;
+		z-index: 2;											
 
 		//НА 992,98 становится выпадающим меню
 		@media (max-width:$md2+px){
-			position: fixed;								//!НЕ ТРОГАТЬ
-			left: 0;												//!НЕ ТРОГАТЬ
-			top: -100%;											//!НЕ ТРОГАТЬ(меню спрятано)
-			width: 100%;										//!НЕ ТРОГАТЬ
-			height: 100%;										//!НЕ ТРОГАТЬ
-			background-color: #fb973b;	//*цвет фона меню
-			display: block;									//!НЕ ТРОГАТЬ
-			z-index: 1;											//!НЕ ТРОГАТЬ
-			margin-top: 31px;								//*отступ сверху (должен быть таким же как высота .header)
-			@include anim(0.3s,0s);					//*микроанимация
+			position: fixed;								
+			left: 0;												
+			top: -100%;
+			width: 100%;										
+			height: 100%;										
+			background-color: #fb973b;
+			display: block;									
+			z-index: 1;											
+			margin-top: 73px;
+			@include anim(0.3s,0s);
 
-			//!НЕ ТРОГАТЬ (При нажатии на бургер)
+
 			&.active{
-				top: 0;												//!НЕ ТРОГАТЬ
+				top: 0;												
 			}
 		}	
 	}
 
 	// .menu__list	(Основное меню)
 	&__list {
-		@include flexbox(); 							//!НЕ ТРОГАТЬ
-		flex: 0 1 770px;									//*Размер и поведение основного меню(увеличение/уменьшение/размер)
-		justify-content: space-between;		//*Выравнивание дочерних элементов
-		align-items: center;							//*Выравнивание по вертикали
+		@include flexbox(); 							
+		flex: 0 1 770px;									
+		justify-content: space-between;		
+		align-items: center;							
 		margin: 0px 117px 0px 0px;
 
-		//!НЕ ТРОГАТЬ(АДАПТИВ)
 		@media (max-width:$md2+px){
 			display:block;
 			margin: auto;
@@ -122,12 +121,11 @@
 
 	// .menu__contact (дополнительное меню)
 	&__contact {
-		@include flexbox();								//!НЕ ТРОГАТЬ
-		flex: 1 0 auto;									//*Размер и поведение основного меню(увеличение/уменьшение/размер)
-		justify-content: flex-start;		//*Выравнивание дочерних элементов
-		align-items: center;							//*Выравнивание по вертикали
+		@include flexbox();
+		flex: 1 0 auto;
+		justify-content: flex-start;
+		align-items: center;
 
-		//!НЕ ТРОГАТЬ(АДАПТИВ)
 		@media (max-width:$md2+px){
 			display:block;
 		}
